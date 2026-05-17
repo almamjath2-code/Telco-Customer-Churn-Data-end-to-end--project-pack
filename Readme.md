@@ -1,102 +1,152 @@
-# Customer Churn Prediction Project
-# 📌  Project Overview
+# 📊 Customer Churn Prediction Project
+# 📌 Overview
 
-This project aims to predict customer churn for a telecommunications company. Churn occurs when a customer stops using the company’s service. Predicting churn helps businesses identify at-risk customers and implement strategies to retain them.
+This project predicts customer churn for a telecommunications company using Machine Learning.
 
-The project uses historical customer data, applies data preprocessing, exploratory data analysis (EDA), and machine learning models to predict whether a customer will churn or not.
+Customer churn refers to customers who stop using a company’s services.
+The goal is to identify such customers early so the business can take retention actions.
 
+The project includes data preprocessing, exploratory data analysis (EDA), feature engineering, model building, and deployment using AWS and Docker.
+
+# 🌐 Live Demo
+
+# 👉 Customer Churn Prediction App
+http://customer-churn-app.s3-website.ap-south-1.amazonaws.com
+
+# 🐳 Dockerized Application
+
+This project is fully containerized using Docker to ensure:
+
+Consistent runtime environment
+Easy deployment
+No dependency issues
+Cloud-ready application
+📦 Run using Docker
+# 1️⃣ Build Docker Image
+docker build -t customer-churn-app .
+# 2️⃣ Run Docker Container
+docker run -p 8000:8000 customer-churn-app
+# 📄 Sample Dockerfile
+FROM python:3.10
+
+WORKDIR /app
+
+COPY requirements.txt .
+
+RUN pip install --no-cache-dir -r requirements.txt
+
+COPY . .
+
+EXPOSE 8000
+
+CMD ["uvicorn", "app:app", "--host", "0.0.0.0", "--port", "8000"]
+# ☁️ Deployment (AWS + Docker)
+# 🌐 Frontend
+# Hosted on AWS S3 Static Website Hosting
+Built using HTML, CSS, JavaScript
+# ⚙️ Backend API
+Built using FastAPI / Flask
+Containerized using Docker
+Deployed on AWS Elastic Beanstalk / EC2
+🚀 Deployment Flow
+GitHub Repository
+      ↓
+Docker Image Build
+      ↓
+AWS Elastic Beanstalk / EC2
+      ↓
+Backend API Running in Container
+      ↓
+Frontend (S3) calls API
 # 🗂 Dataset
 
-The dataset contains information about customers such as demographics, account information, and usage metrics.
+The dataset contains customer details such as demographics, account information, and usage behavior.
 
-# Key Features:
-Age – Age of the customer (in years)
-Gender – Customer’s gender
-Tenure – Number of months the customer has stayed
-MonthlyCharges – Monthly billing amount
-TotalCharges – Total billing amount
-Contract – Type of contract (Month-to-Month, One Year, Two Year)
-PaymentMethod – How the customer pays
-Churn – Target variable (Yes = churned, No = retained)
-
-# Data Source: [Mention your dataset source, e.g., Kaggle or internal dataset]
-
-# 🛠 Tools & Technologies
-Python – Main programming language
-Pandas & NumPy – Data manipulation
-Matplotlib & Seaborn – Data visualization
-Scipy – Detecting and handling outliers (e.g., using z-score or IQR methods)
-Scikit-learn – Machine learning algorithms & evaluation
-Streamlit – Web app for interactive predictions
-Joblib / Pickle – Model serialization
+Key Features:
+Feature	Description
+Age	Age of the customer
+Gender	Customer gender
+Tenure	Number of months stayed
+MonthlyCharges	Monthly billing amount
+TotalCharges	Total billing amount
+Contract	Contract type
+PaymentMethod	Payment method
+Churn	Target variable
+🛠 Tools & Technologies
+Python
+Pandas & NumPy
+Matplotlib & Seaborn
+Scikit-learn
+ FastAPI
+ Joblib
+Docker
+AWS S3
+AWS Elastic Beanstalk
 # 🧹 Data Preprocessing
-Handling missing values
-Encoding categorical variables (Label Encoding / One-Hot Encoding)
+Missing value handling
+Encoding categorical variables
 Feature scaling
-Train-test split for model validation
-
+Train-test split
 # 📊 Exploratory Data Analysis (EDA)
-Visualizations to understand distributions and patterns
-Correlation analysis between features
-Identifying trends related to churn
+Churn distribution analysis
+Correlation heatmap
+Customer behavior analysis
+Contract vs churn insights
 # 🤖 Machine Learning Models
+Model	Accuracy	Precision	Recall	F1-Score
+Random Forest (Test)	0.76	0.68	0.56	0.61
+Random Forest (Train)	0.75	0.67	0.55	0.60
 
-# The following models were trained and evaluated:
+# Best Model: Random Forest Classifier
 
-Model	            Accuracy	Precision	Recall	F1-Score
-Random Forest test	  0.76	        0.68	   0.56	   0.61
-Random Forest train    0.75         0.67        0.55    0.60
+# 🚀 Web Application
 
-Best Model: Random Forest (example, update with your results)
-
-# Feature Importance: Shows which features most influence churn prediction.
-
-# 🚀 Streamlit Web App
-
-An interactive app allows users to input customer information and predict churn in real-time.
-
-## 🌐 Live Demo
-👉 https://telco-customer-churn-data-end-to-end--project-aiueqylwux3rdnxy.streamlit.app/
-
-
-
-
-# How to run the app:
-
-```bash
-pip install -r requirements.txt
-streamlit run app.py
-
+Interactive app to predict whether a customer will churn or not based on input features.
 
 # 📈 Project Workflow
-Load dataset
-Data cleaning & preprocessing
-Exploratory data analysis
-Feature engineering & encoding
-Model training & evaluation
-Save the best model (.pkl file)
-Build Streamlit app for real-time predictions
-
-
-# 💡 Insights
-Customers with month-to-month contracts have higher churn rates
-High monthly charges correlate with higher churn
-Longer tenure reduces the likelihood of churn
-
+Data collection
+Data preprocessing
+Exploratory Data Analysis
+Feature engineering
+Model training
+Model saving
+Docker containerization
+AWS deployment
+Web app integration
+# 💡 Key Insights
+Month-to-month contracts have highest churn
+High monthly charges increase churn
+Longer tenure reduces churn probability
+Payment method impacts retention
 # ⚡ Future Improvements
-Hyperparameter tuning to improve model accuracy
-Incorporate additional features (e.g., customer complaints, usage patterns)
-Deploy on cloud platforms for wider access
-📁 Project Structure
+Add XGBoost / LightGBM models
+Improve Docker optimization (multi-stage build)
+Add CI/CD pipeline using GitHub Actions
+Deploy using Kubernetes (advanced)
+Add monitoring dashboard (CloudWatch)
+# 📁 Project Structure
 customer_churn_project/
 │
-├─ data/               # Dataset files
-├─ notebooks/          # EDA & model experimentation
-├─ app.py              # Streamlit web app
-├─ model.pkl           # Saved trained model
-├─ requirements.txt    # Python dependencies
-└─ README.md           # Project description
+├── data/
+├── notebooks/
+├── app.py
+├── model.pkl
+├── requirements.txt
+├── Dockerfile
+└── README.md
+# 🤝 Contributing
+Fork repository
+Create feature branch
+Commit changes
+Push branch
+Create Pull Request
+# 📜 License
 
-# For questions or suggestions:
-Name: Amjath
+MIT License
+
+# 👨‍💻 Author
+
+Amjath
+
+GitHub: https://github.com/almamjath2-code
 Email: almamjath2@gmail.com
