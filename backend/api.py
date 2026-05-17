@@ -56,7 +56,7 @@ def verify_api_key(x_api_key: str):
 # --------------------------
 @app.get("/health")
 def health():
-    return {"health": " welcome home to customer churn prediction api"}
+    return {"health": " welcome "}
 
 @app.post("/predict")
 def predict(data: CustomerData, x_api_key: str = Header(None)):
